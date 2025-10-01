@@ -1,0 +1,25 @@
+qtd_numeros_aleatorios: 100000
+
+filas:
+  - id: 1
+    servidores: 2
+    capacidade: 3
+    chegada_min: 1.0
+    chegada_max: 4.0
+    servico_min: 3.0
+    servico_max: 4.0
+  - id: 2
+    servidores: 1
+    capacidade: 5
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 2.0
+    servico_max: 3.0
+
+transicoes:
+  - origem: 1
+    destino: 2
+    probabilidade: 1.0
+  - origem: 2
+    destino: saida
+    probabilidade: 1.0
