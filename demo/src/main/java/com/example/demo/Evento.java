@@ -7,11 +7,13 @@ public class Evento implements Comparable<Evento> {
     public int tipo;
     public double tempo;
     public Fila fila;
+    public boolean externalArrival; // true se veio do exterior (chegada externa), false se é passagem interna
 
-    public Evento(int tipo, double tempo, Fila fila) {
+    public Evento(int tipo, double tempo, Fila fila, boolean externalArrival) {
         this.tipo = tipo;
         this.tempo = tempo;
         this.fila = fila;
+        this.externalArrival = externalArrival;
     }
 
     @Override
@@ -19,4 +21,3 @@ public class Evento implements Comparable<Evento> {
         return Double.compare(this.tempo, outro.tempo);
     }
 }
-
