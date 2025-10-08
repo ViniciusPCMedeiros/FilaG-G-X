@@ -1,38 +1,57 @@
 qtd_numeros_aleatorios: 100000
+
 filas:
   - id: 1
-    servidores: 1
-    capacidade: -1
-    chegada_min: 2.0
-    chegada_max: 4.0
-    servico_min: 1.0
-    servico_max: 2.0
-
-  - id: 2
     servidores: 2
     capacidade: 5
+    chegada_min: 2.0
+    chegada_max: 4.0
+    servico_min: 3.0
+    servico_max: 5.0
+
+  - id: 2
+    servidores: 3
+    capacidade: 6
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 5.0
+    servico_max: 8.0
+
+  - id: 3
+    servidores: 1
+    capacidade: 4
     chegada_min: 0.0
     chegada_max: 0.0
     servico_min: 4.0
     servico_max: 6.0
 
-  - id: 3
-    servidores: 2
-    capacidade: 10
-    chegada_min: 0.0
-    chegada_max: 0.0
-    servico_min: 5.0
-    servico_max: 15.0
-
 transicoes:
+  # Fila 1 (Triagem)
   - origem: 1
     destino: 2
-    probabilidade: 1.0
+    probabilidade: 0.6
+  - origem: 1
+    destino: 3
+    probabilidade: 0.3
+  - origem: 1
+    destino: saida
+    probabilidade: 0.1
 
+  # Fila 2 (Atendimento Médico)
+  - origem: 2
+    destino: saida
+    probabilidade: 0.8
   - origem: 2
     destino: 3
-    probabilidade: 1.0
+    probabilidade: 0.2
 
+  # Fila 3 (Laboratório)
+  - origem: 3
+    destino: 2
+    probabilidade: 0.1
+  - origem: 3
+    destino: 1
+    probabilidade: 0.05
   - origem: 3
     destino: saida
-    probabilidade: 1.0
+    probabilidade: 0.85

@@ -1,0 +1,79 @@
+qtd_numeros_aleatorios: 100000
+
+filas:
+  - id: 1
+    servidores: 2
+    capacidade: 12
+    chegada_min: 1.5
+    chegada_max: 3.0
+    servico_min: 0.8
+    servico_max: 1.5
+
+  - id: 2
+    servidores: 4        # aumento de servidores
+    capacidade: 10       # aumento de capacidade
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 2.5     # menor tempo de atendimento
+    servico_max: 4.0
+
+  - id: 3
+    servidores: 3        # aumento de servidores
+    capacidade: 8
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 4.5
+    servico_max: 7.0
+
+  - id: 4
+    servidores: 3
+    capacidade: 10
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 1.5
+    servico_max: 3.0
+
+transicoes:
+  # Da triagem (Fila 1)
+  - origem: 1
+    destino: 2
+    probabilidade: 0.45
+  - origem: 1
+    destino: 3
+    probabilidade: 0.25
+  - origem: 1
+    destino: 4
+    probabilidade: 0.2
+  - origem: 1
+    destino: saida
+    probabilidade: 0.1
+
+  # Do caixa (Fila 2)
+  - origem: 2
+    destino: 3
+    probabilidade: 0.3
+  - origem: 2
+    destino: 1
+    probabilidade: 0.05
+  - origem: 2
+    destino: saida
+    probabilidade: 0.65
+
+  # Da gerência (Fila 3)
+  - origem: 3
+    destino: 2
+    probabilidade: 0.1
+  - origem: 3
+    destino: 1
+    probabilidade: 0.05
+  - origem: 3
+    destino: saida
+    probabilidade: 0.85
+
+  # Do atendimento digital (Fila 4)
+  - origem: 4
+    destino: saida
+    probabilidade: 0.95   # mais eficiência digital
+  - origem: 4
+    destino: 1
+    probabilidade: 0.05

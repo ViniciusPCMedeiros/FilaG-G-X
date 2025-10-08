@@ -1,0 +1,79 @@
+qtd_numeros_aleatorios: 100000
+
+filas:
+  - id: 1
+    servidores: 2
+    capacidade: 10
+    chegada_min: 1.5
+    chegada_max: 3.0
+    servico_min: 1.0
+    servico_max: 2.0
+
+  - id: 2
+    servidores: 3
+    capacidade: 6
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 3.0
+    servico_max: 5.0
+
+  - id: 3
+    servidores: 2
+    capacidade: 5
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 6.0
+    servico_max: 9.0
+
+  - id: 4
+    servidores: 2
+    capacidade: 8
+    chegada_min: 0.0
+    chegada_max: 0.0
+    servico_min: 2.0
+    servico_max: 3.5
+
+transicoes:
+  # Da triagem (Fila 1)
+  - origem: 1
+    destino: 2
+    probabilidade: 0.5   # metade vai para o caixa
+  - origem: 1
+    destino: 3
+    probabilidade: 0.3   # parte vai direto para a gerência
+  - origem: 1
+    destino: 4
+    probabilidade: 0.1   # alguns optam pelo atendimento digital
+  - origem: 1
+    destino: saida
+    probabilidade: 0.1   # outros desistem ou resolvem o problema rapidamente
+
+  # Do caixa (Fila 2)
+  - origem: 2
+    destino: 3
+    probabilidade: 0.4   # vão para a gerência
+  - origem: 2
+    destino: 1
+    probabilidade: 0.1   # voltam à triagem
+  - origem: 2
+    destino: saida
+    probabilidade: 0.5   # finalizam atendimento
+
+  # Da gerência (Fila 3)
+  - origem: 3
+    destino: 2
+    probabilidade: 0.2   # volta ao caixa para confirmação
+  - origem: 3
+    destino: 1
+    probabilidade: 0.1   # volta à triagem
+  - origem: 3
+    destino: saida
+    probabilidade: 0.7   # encerra atendimento
+
+  # Do atendimento digital (Fila 4)
+  - origem: 4
+    destino: saida
+    probabilidade: 0.9   # 90% resolvem por ali
+  - origem: 4
+    destino: 1
+    probabilidade: 0.1   # 10% precisam ir à triagem física
